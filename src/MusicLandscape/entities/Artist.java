@@ -9,6 +9,7 @@ public class Artist implements Comparable<Artist>{
 
     //constructor
     public Artist(String name) {
+        name = name.trim();
         this.name = name;
     }
 

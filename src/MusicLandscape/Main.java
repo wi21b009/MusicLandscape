@@ -47,7 +47,16 @@ public class Main {
             System.out.printf("%s\n", testList[i].getTitle());
         }
 
-        boolean four = new Track().scan();
+        //boolean four = new Track().scan();
+
+        String test12 = ",,,,,,,,,";
+        String[] test13 = test12.split(",");
+
+        for (String s : test13) {
+            System.out.println(s);
+            System.out.print("Seas");
+        }
+        System.out.print(test13.length);
 
     }
 }

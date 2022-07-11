@@ -11,7 +11,7 @@ public class CSVTrackFormatter implements MyFormatter<Track> {
 
     @Override
     public String format(Track track) {
-        return String.format("%s,%s,%s,%d,%d", track.getTitle(), track.getPerformer().getName(), track.getWriter().getName(), track.getYear(), track.getDuration());
+        return String.format("%s, %s, %s, %d, %d", track.getTitle(), track.getWriter().getName(), track.getPerformer().getName(), track.getDuration(), track.getYear());
     }
 
     @Override
