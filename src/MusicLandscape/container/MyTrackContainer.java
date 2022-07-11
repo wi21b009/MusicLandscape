@@ -56,11 +56,10 @@ public class MyTrackContainer {
     public void reset() {
         selection.clear();
 
-        for (Track t : tracks)
-            selection.add(t);
+        selection.addAll(tracks);
 
         tracks.clear();
-    };
+    }
 
     public int remove() {
         int i = 0;
