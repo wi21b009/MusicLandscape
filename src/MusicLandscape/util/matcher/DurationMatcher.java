@@ -19,7 +19,7 @@ public class DurationMatcher extends MyMatcher<Track> {
     }
     @Override
     public boolean matches(Track track) {
-        if (track.getDuration() >= lower && track.getDuration() < upper)
+        if (track.getDuration() >= lower && track.getDuration() <= upper)
             return true;
         return false;
     }
@@ -34,14 +34,19 @@ public class DurationMatcher extends MyMatcher<Track> {
 
         int i = 0;
         for (String s : strings) {
-            ints[i] = Integer.parseInt(s);
+            try {
+                ints[i] = Integer.parseInt(s);
+            } catch (NumberFormatException e) {
+                return;
+            }
+
             i++;
         }
 
-        if (ints[0] < lower)
+        if (ints[0] > lower)
             lower = ints[0];
 
-        if (ints[1] > upper)
+        if (ints[1] < upper && ints[1] >= ints[0])
             upper = ints[1];
     }
 

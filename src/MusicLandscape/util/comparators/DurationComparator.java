@@ -10,11 +10,14 @@ import java.util.function.ToLongFunction;
 
 public class DurationComparator implements java.util.Comparator<Track> {
 
-    public DurationComparator() {}
-
     @Override
     public int compare(Track o1, Track o2) {
-        return 0;
+        return o1.getDuration() - o2.getDuration();
+    }
+
+    @Override
+    public String toString() {
+        return "by duration";
     }
 
     @Override

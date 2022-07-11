@@ -3,50 +3,110 @@ package MusicLandscape.container;
 import MusicLandscape.entities.Track;
 import MusicLandscape.util.MyMatcher;
 
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class MyTrackContainer {
     private java.util.List<Track> selection;
     private java.util.Set<Track> tracks;
 
-    public MyTrackContainer() {}
+    public MyTrackContainer() {
+        this.selection = new LinkedList<Track>();
+        this.tracks = new HashSet<Track>();
+    }
 
     public MyTrackContainer(Iterable<Track> t) {
+        this.selection = new LinkedList<Track>();
+        this.tracks = new HashSet<Track>();
 
-        for (Track tracklist : t) {
-            selection.add(tracklist);
+        for (Track track : t) {
+            tracks.add(track);
+            selection.add(track);
         }
     }
 
-    public MyTrackContainer(Track[] t) {}
+    public MyTrackContainer(Track[] t) {
+        this.selection = new LinkedList<Track>();
+        this.tracks = new HashSet<Track>();
 
-    public void sort(java.util.Comparator<Track> theComp, boolean asc) {}
-
-    public int filter(MyMatcher<Track> matcher) {
-        return 10;
+        for (Track track : t) {
+            selection.add(track);
+            tracks.add(track);
+        }
     }
 
-    public void reset() {};
+    public void sort(java.util.Comparator<Track> theComp, boolean asc) {
+        selection.sort(theComp);
+    }
+
+    public int filter(MyMatcher<Track> matcher) {
+        int i = 0;
+
+        Track[] track = new Track[selection.size()];
+
+        for (Track t : selection.toArray(track)) {
+            if (!matcher.matches(t)) {
+                i++;
+                selection.remove(t);
+            }
+        }
+
+        return i;
+    }
+
+    public void reset() {
+        selection.clear();
+
+        for (Track t : tracks)
+            selection.add(t);
+
+        tracks.clear();
+    };
 
     public int remove() {
-        return 10;
+        int i = 0;
+
+        //Track[] track = new Track[selection.size()];
+
+        for (Track t : selection) {
+            tracks.remove(t);
+            i++;
+        }
+        selection.clear();
+
+        selection.addAll(tracks);
+
+        return i;
     }
 
     public int addAll(Track[] t) {
-        return 10;
+        int i = 0;
+        for (Track track : t) {
+            tracks.add(track);
+            i++;
+        }
+
+        return i;
     }
 
     public int size() {
-        return 10;
+        return tracks.size();
     }
 
     public Track[] selection() {
-        return null;
+        Track[] track = new Track[selection.size()];
+        return selection.toArray(track);
     }
 
     public boolean add(Track t) {
-        return true;
+        if (t == null)
+            return false;
+
+        boolean unique = tracks.add(t);
+
+        if (!unique)
+            selection.add(t);
+
+        return unique;
     }
 
 }
